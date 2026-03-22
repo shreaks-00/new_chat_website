@@ -17,4 +17,5 @@ COPY . .
 EXPOSE 5000
 
 # Run the application with Gunicorn and the Eventlet worker for WebSockets
-CMD ["gunicorn", "--worker-class", "eventlet", "-w", "1", "-b", "0.0.0.0:5000", "app:app"]
+# Use the shell form to allow environment variable expansion
+CMD gunicorn --worker-class eventlet -w 1 -b 0.0.0.0:${PORT:-5000} app:app
