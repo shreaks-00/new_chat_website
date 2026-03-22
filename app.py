@@ -44,16 +44,8 @@ def update_room_list(to=None):
         socketio.emit('room_list', rooms_data)
 
 @app.route('/')
-def landing():
-    return send_from_directory('frontend', 'index.html')
-
-@app.route('/chat')
-def chat():
-    return send_from_directory('frontend', 'chat.html')
-
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory('frontend', path)
+def index():
+    return jsonify({"status": "Backend API is running", "version": "1.0.0"})
 
 @socketio.on('connect')
 def handle_connect(auth=None):
