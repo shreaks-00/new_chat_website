@@ -13,6 +13,10 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'yaper-secret-99-prod')
 # Allow all origins for now; can be restricted to the Netlify URL once deployed
 socketio = SocketIO(app, cors_allowed_origins="*", max_http_buffer_size=10485760, async_mode='eventlet')
 
+# Define paths relative to this script
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.join(BASE_DIR, '..', 'frontend')
+
 room_info = {} # Maps room_name -> {'is_private': bool, 'password': str, 'limit': int, 'users': {username: dict}}
 room_history = {} # Stores latest 50 messages per room
 session_users = {} # Maps connections: {sid: {'username': 'u', 'room': 'r', 'color': 'color'}}
@@ -45,15 +49,15 @@ def update_room_list(to=None):
 
 @app.route('/')
 def landing():
-    return send_from_directory('frontend', 'index.html')
+    return send_from_directory(FRONTEND_DIR, 'index.html')
 
 @app.route('/chat')
 def chat():
-    return send_from_directory('frontend', 'chat.html')
+    return send_from_directory(FRONTEND_DIR, 'chat.html')
 
 @app.route('/<path:path>')
 def serve_static(path):
-    return send_from_directory('frontend', path)
+    return send_from_directory(FRONTEND_DIR, path)
 
 @socketio.on('connect')
 def handle_connect(auth=None):
@@ -217,4 +221,5 @@ def handle_mark_read(data):
 
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    socketio.run(app, host='0.0.0.0', port=port)

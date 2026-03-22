@@ -5,13 +5,16 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copy the requirements file into the container
-COPY requirements.txt .
+COPY backend/requirements.txt ./backend/
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r backend/requirements.txt
 
 # Copy the rest of the application code
 COPY . .
+
+# Set WORKDIR to the backend folder for running the app
+WORKDIR /app/backend
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
