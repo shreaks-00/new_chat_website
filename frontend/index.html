@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaper | Secure Private Chat Rooms & Instant Real-Time Messaging</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Yaper is a premium, privacy-first private chat platform. Create secure, password-protected rooms instantly with vibrant user identities and effortless mentions. No tracking, zero logs, total privacy.">
+    <meta name="keywords" content="private chat rooms, secure messaging, encrypted chat online, Yaper chat, anonymous chat, business huddles, gamer chat rooms, secure private rooms">
+    <link rel="canonical" href="https://yaper.chat">
+    
+    <!-- Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yaper.chat">
+    <meta property="og:title" content="Yaper | The Ultimate Privacy-First Private Chat Platform">
+    <meta property="og:description" content="Connect securely with Yaper. Instant private rooms, unique vibrant identities, and total anonymity for your conversations.">
+    
+    <!-- Structured Data (JSON-LD) for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Yaper",
+      "url": "https://yaper.chat",
+      "description": "Premium private chat platform with automatic colors and secure rooms."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Yaper really private?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Yaper uses in-memory room management. We do not store your messages permanently, and all rooms are session-based with optional password protection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do room limits work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When creating a room, you can set a user limit. Once reached, no new users can join until someone leaves, ensuring your conversation stays intimate and secure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are user mentions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can tag any user by typing their username followed by three underscores (e.g., username___). This highlights the message for them and triggers a priority notification."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --accent: #10b981;
+            --bg: #0f172a;
+            --bg-light: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+        }
+
+        /* Base Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            line-height: 1.7; 
+            overflow-x: hidden; 
+        }
+        h1, h2, h3, .logo { font-family: 'Outfit', sans-serif; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 90px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 2rem; font-weight: 900; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links a { margin-left: 30px; text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--text); }
+        .btn-cta-sm { background: var(--primary); padding: 12px 28px; border-radius: 50px; color: white !important; font-weight: 700; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2); transition: all 0.3s; }
+        .btn-cta-sm:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(99, 102, 241, 0.3); }
+
+        /* Hero Section */
+        .hero { padding: 220px 0 140px; text-align: center; position: relative; }
+        .hero-glow { position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 1000px; height: 1000px; background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0) 70%); z-index: -1; }
+        .hero h1 { font-size: clamp(3.5rem, 10vw, 6rem); line-height: 1; letter-spacing: -3px; margin-bottom: 30px; }
+        .hero p { font-size: 1.4rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 50px; }
+        .btn-main { display: inline-block; padding: 22px 60px; font-size: 1.4rem; font-weight: 800; border-radius: 100px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .btn-main:hover { transform: scale(1.08) rotate(-1deg); box-shadow: 0 30px 60px rgba(236, 72, 153, 0.4); }
+
+        /* Section Styling */
+        section { padding: 120px 0; }
+        .section-tag { color: var(--secondary); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 15px; display: block; }
+        .section-title { font-size: 3rem; margin-bottom: 60px; line-height: 1.2; }
+
+        /* Feature Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; }
+        .card { background: var(--bg-light); padding: 50px; border-radius: var(--radius-lg); border: 1px solid var(--border); transition: all 0.4s; }
+        .card:hover { border-color: var(--primary); transform: translateY(-10px); }
+        .card .icon { font-size: 3.5rem; margin-bottom: 30px; display: block; }
+        .card h3 { font-size: 1.8rem; margin-bottom: 20px; }
+        .card p { color: var(--text-muted); }
+
+        /* How it Works */
+        .steps { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
+        .step { flex: 1; min-width: 250px; text-align: center; }
+        .step-num { width: 60px; height: 60px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; border-radius: 50%; margin: 0 auto 25px; }
+
+        /* Use Cases */
+        .use-case-box { display: flex; align-items: center; gap: 50px; margin-bottom: 80px; }
+        .use-case-box:nth-child(even) { flex-direction: row-reverse; }
+        .use-case-content { flex: 1; }
+        .use-case-img { flex: 0.8; height: 400px; background: var(--bg-light); border-radius: var(--radius-lg); overflow: hidden; position: relative; border: 1px solid var(--border); }
+        .use-case-img::after { content: 'Yaper Chat Preview'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-style: italic; }
+
+        /* FAQ Section */
+        .faq-item { background: var(--bg-light); border: 1px solid var(--border); margin-bottom: 15px; border-radius: var(--radius-md); overflow: hidden; cursor: pointer; transition: all 0.3s; }
+        .faq-item:hover { border-color: var(--primary); }
+        .faq-question { padding: 25px 35px; font-weight: 700; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 35px 25px; color: var(--text-muted); display: none; }
+        .faq-item.active .faq-answer { display: block; }
+
+        /* Footer */
+        footer { padding: 80px 0; background: #070b14; border-top: 1px solid var(--border); margin-top: 100px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px; }
+        .footer-logo { font-size: 1.5rem; font-weight: 900; color: white; margin-bottom: 20px; display: block; }
+        .footer-links h4 { margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--primary); }
+
+        @media (max-width: 992px) {
+            .use-case-box { flex-direction: column !important; text-align: center; }
+            .hero h1 { font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <div class="logo">Yaper</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How it Works</a>
+                <a href="#faq">FAQ</a>
+                <a href="chat.html" class="btn-cta-sm">Launch Chat</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-glow"></div>
+        <div class="container">
+            <span class="section-tag">Privacy Redefined</span>
+            <h1>Beautifully Private <span style="background: linear-gradient(to right, #6EE7B7, #3B82F6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Conversations.</span></h1>
+            <p>Connect instantly with password-protected rooms, automatic vibrant identities, and no-compromise privacy. Your messages, your control.</p>
+            <a href="chat.html" class="btn-main">Start Your Room Now &rarr;</a>
+            
+            <div style="margin-top: 80px; transform: perspective(1000px) rotateX(10deg); box-shadow: 0 50px 100px rgba(0,0,0,0.5); border-radius: 20px; overflow: hidden; border: 1px solid var(--border);">
+                <img src="/preview.png" alt="Yaper Chat Interface Preview" style="width: 100%; display: block;">
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="container">
+        <span class="section-tag">Powerful Features</span>
+        <h2 class="section-title">Built for the Modern Communicator.</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="icon">🎨</span>
+                <h3>Vibrant Color Identities</h3>
+                <p>Never pick a color again. Yaper's intelligent engine assigns every user a unique, high-contrast vibrant color upon entry, ensuring clear visual distinction in every chat bubble.</p>
+            </div>
+            <div class="card">
+                <span class="icon">🏷️</span>
+                <h3>Smart Mention System</h3>
+                <p>Tag anyone with <strong>username___</strong>. Our mentioning engine highlights messages with a golden gradient and triggers priority alerts, so critical huddles never go unnoticed.</p>
+            </div>
+            <div class="card">
+                <span class="icon">🔒</span>
+                <h3>Instant Private Rooms</h3>
+                <p>Deploy a private room in seconds. Set user limits, togglable passwords, and total room destruction once everyone leaves. Your ephemeral data stays ephemeral.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section id="how-it-works" style="background: #0d131f;">
+        <div class="container">
+            <span class="section-tag">Onboarding</span>
+            <h2 class="section-title">Three Steps to Secure Freedom.</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h3>Create or Join</h3>
+                    <p>Enter a room name. If you're the first, it's yours to configure.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h3>Secure the Perimeter</h3>
+                    <p>Set a password and user limit to keep your conversation locked down.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h3>Chat Away</h3>
+                    <p>Share the link and start talking. Experience real-time speed with zero lag.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="container">
+        <div class="use-case-box">
+            <div class="use-case-content">
+                <span class="section-tag">Gaming</span>
+                <h2>Sync Your Squad Faster.</h2>
+                <p>No account creation, no overhead. Just launch Yaper, share your temporary room link, and coordinate your next raid with crystal-clear text and zero tracking.</p>
+            </div>
+            <div class="use-case-img" style="background: url('/preview.png') center/cover no-repeat;"></div>
+        </div>
+        <div class="use-case-box">
+            <div class="use-case-content">
+                <span class="section-tag">Business</span>
+                <h2>Confidential Huddles Only.</h2>
+                <p>Need a quick, private space to discuss sensitive info? Yaper's session-based logic ensures that once your meeting is over, that data vanishes from memory.</p>
+            </div>
+            <div class="use-case-img" style="background: url('/preview.png') center/cover no-repeat; filter: hue-rotate(90deg);"></div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="container" style="max-width: 800px;">
+        <span class="section-tag">Get Answers</span>
+        <h2 class="section-title" style="text-align: center;">Frequently Asked.</h2>
+        
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">Does Yaper store my messages? <span>+</span></div>
+            <div class="faq-answer">No. Yaper operates on a session-persistence model. Messages are held in-memory for recent history (up to 50 messages) and are cleared once a room becomes inactive for an extended period.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">Can I use Yaper on my phone? <span>+</span></div>
+            <div class="faq-answer">Absolutely. Yaper is built with a mobile-first philosophy, ensuring the landing page and chat interface are perfectly responsive on any screen size.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">How do the mentions work? <span>+</span></div>
+            <div class="faq-answer">Simply type the name of the user you want to tag followed by three underscores, like <strong>alex___</strong>. The system handles the rest.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">Is it free to use? <span>+</span></div>
+            <div class="faq-answer">Yes, Yaper is currently free to use with all features enabled including private rooms and custom user limits.</div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <span class="footer-logo">Yaper</span>
+                    <p>The next generation of private conversation. Secure, vibrant, and always focused on you.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="chat.html">Launch Chat</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legalese</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Info</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top: 60px; text-align: center; font-size: 0.9rem;">
+                &copy; 2026 Yaper Secure Communication Platform. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth reveal on scroll (simple implementation)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.card, .use-case-box, .step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
