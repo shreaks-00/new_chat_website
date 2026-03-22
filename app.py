@@ -10,7 +10,7 @@ import time
 app = Flask(__name__)
 CORS(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'yaper-secret-99-prod')
-# Allow all origins for now; can be restricted to the Netlify URL once deployed
+# Allow all origins to support separate frontend deployment (e.g., Netlify)
 socketio = SocketIO(app, cors_allowed_origins="*", max_http_buffer_size=10485760, async_mode='eventlet')
 
 room_info = {} # Maps room_name -> {'is_private': bool, 'password': str, 'limit': int, 'users': {username: dict}}
