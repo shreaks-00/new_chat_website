@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yaper | Secure Private Chat Rooms & Instant Real-Time Messaging</title>
-     <link rel="icon" type="image/x-icon" href="icon/icon.jpg">
+    <link rel="icon" type="image/x-icon" href="icon/icon.jpg">
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Yaper is a premium, privacy-first private chat platform. Create secure, password-protected rooms instantly with vibrant user identities and effortless mentions. No tracking, zero logs, total privacy.">
-    <meta name="keywords" content="private chat rooms, secure messaging, encrypted chat online, Yaper chat, anonymous chat, business huddles, gamer chat rooms, secure private rooms">
+    <meta name="description"
+        content="Yaper is a premium, privacy-first private chat platform. Create secure, password-protected rooms instantly with vibrant user identities and effortless mentions. No tracking, zero logs, total privacy.">
+    <meta name="keywords"
+        content="private chat rooms, secure messaging, encrypted chat online, Yaper chat, anonymous chat, business huddles, gamer chat rooms, secure private rooms">
     <link rel="canonical" href="https://yaper.chat">
-    
+
     <!-- Social Media Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yaper.chat">
     <meta property="og:title" content="Yaper | The Ultimate Privacy-First Private Chat Platform">
-    <meta property="og:description" content="Connect securely with Yaper. Instant private rooms, unique vibrant identities, and total anonymity for your conversations.">
-    
+    <meta property="og:description"
+        content="Connect securely with Yaper. Instant private rooms, unique vibrant identities, and total anonymity for your conversations.">
+
     <!-- Structured Data (JSON-LD) for SEO -->
     <script type="application/ld+json">
     {
@@ -77,8 +81,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Outfit:wght@500;700;900&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --primary: #6366f1;
@@ -94,23 +100,43 @@
         }
 
         /* Base Reset */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            line-height: 1.7; 
-            overflow-x: hidden; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1, h2, h3, .logo { font-family: 'Outfit', sans-serif; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .logo {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
         /* Navigation */
         nav {
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 90px;
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(15px);
@@ -119,119 +145,538 @@
             display: flex;
             align-items: center;
         }
-        .nav-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .logo { font-size: 2rem; font-weight: 900; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; white-space: nowrap; }
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { margin-left: 30px; text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.3s; }
-        .nav-links a:not(.btn-cta-sm) { display: inline-block; }
-        .nav-links a:hover { color: var(--text); }
-        .btn-cta-sm { background: var(--primary); padding: 12px 28px; border-radius: 50px; color: white !important; font-weight: 700; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2); transition: all 0.3s; white-space: nowrap; }
-        .btn-cta-sm:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(99, 102, 241, 0.3); }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:not(.btn-cta-sm) {
+            display: inline-block;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .btn-cta-sm {
+            background: var(--primary);
+            padding: 12px 28px;
+            border-radius: 50px;
+            color: white !important;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-cta-sm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(99, 102, 241, 0.3);
+        }
 
         /* Partner Promotion Slot */
-        .nav-promo { margin-right: auto; margin-left: 40px; }
-        .promo-badge { background: rgba(255, 255, 255, 0.05); padding: 6px 16px; border-radius: 50px; border: 1px dashed var(--border); font-size: 0.75rem; color: var(--text-muted); text-decoration: none; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
-        .promo-badge:hover { background: rgba(255, 255, 255, 0.1); color: var(--text); border-style: solid; border-color: var(--primary); }
-        .promo-status { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0.4; transform: scale(0.9); } }
+        .nav-promo {
+            margin-right: auto;
+            margin-left: 40px;
+        }
+
+        .promo-badge {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 16px;
+            border-radius: 50px;
+            border: 1px dashed var(--border);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .promo-badge:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border-style: solid;
+            border-color: var(--primary);
+        }
+
+        .promo-status {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.4;
+                transform: scale(0.9);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 0.4;
+                transform: scale(0.9);
+            }
+        }
 
         /* Advertisement Banner Placeholder */
-        .ad-banner-wrap { padding: 10px 24px 0; display: flex; justify-content: center; position: relative; z-index: 10; }
-        .ad-banner { max-width: 1000px; width: 100%; padding: 50px 40px; border: 1px dashed var(--border); border-radius: var(--radius-lg); background: rgba(255, 255, 255, 0.03); text-align: center; color: var(--text-muted); font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s; cursor: pointer; text-decoration: none; pointer-events: auto; }
-        .ad-banner:hover { background: rgba(255, 255, 255, 0.08); border-style: solid; border-color: var(--primary); color: var(--text); transform: scale(1.01); }
-        @media (max-width: 768px) { .ad-banner-wrap { padding-top: 10px; } .ad-banner { font-size: 0.75rem; padding: 22px 16px; letter-spacing: 1px; border-radius: 50px; } }
- Drum,
+        .ad-banner-wrap {
+            padding: 10px 24px 0;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
 
-        /* Hero Section */
-        .hero { padding: 90px 0 140px; text-align: center; position: relative; }
-        .hero-glow { position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 1000px; height: 1000px; background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0) 70%); z-index: -1; }
-        .hero h1 { font-size: clamp(2.5rem, 10vw, 6rem); line-height: 1.1; letter-spacing: -2px; margin-bottom: 30px; }
-        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 50px; padding: 0 20px; }
-        .btn-main { display: inline-block; padding: 18px 45px; font-size: 1.2rem; font-weight: 800; border-radius: 100px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .btn-main:hover { transform: scale(1.05) rotate(-1deg); box-shadow: 0 30px 60px rgba(236, 72, 153, 0.4); }
+        .ad-banner {
+            max-width: 1000px;
+            width: 100%;
+            padding: 50px 40px;
+            border: 1px dashed var(--border);
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.03);
+            text-align: center;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            pointer-events: auto;
+        }
 
-        /* Section Styling */
-        section { padding: 120px 0; }
-        .section-tag { color: var(--secondary); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 15px; display: block; }
-        .section-title { font-size: 3rem; margin-bottom: 60px; line-height: 1.2; }
-
-        /* Feature Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: var(--bg-light); padding: 40px; border-radius: var(--radius-lg); border: 1px solid var(--border); transition: all 0.4s; }
-        .card:hover { border-color: var(--primary); transform: translateY(-10px); }
-        .card .icon { font-size: 3rem; margin-bottom: 25px; display: block; }
-        .card h3 { font-size: 1.6rem; margin-bottom: 15px; }
-        .card p { color: var(--text-muted); font-size: 1rem; }
-
-        /* How it Works */
-        .steps { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
-        .step { flex: 1; min-width: 250px; text-align: center; }
-        .step-num { width: 60px; height: 60px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; border-radius: 50%; margin: 0 auto 25px; }
-
-        /* Use Cases */
-        .use-case-box { display: flex; align-items: center; gap: 50px; margin-bottom: 80px; }
-        .use-case-box:nth-child(even) { flex-direction: row-reverse; }
-        .use-case-content { flex: 1; }
-        .use-case-img { flex: 0.8; height: 350px; background: var(--bg-light); border-radius: var(--radius-lg); overflow: hidden; position: relative; border: 1px solid var(--border); }
-        .use-case-img::after { content: 'Yaper Chat Preview'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-style: italic; font-size: 0.9rem; }
-
-        /* FAQ Section */
-        .faq-item { background: var(--bg-light); border: 1px solid var(--border); margin-bottom: 15px; border-radius: var(--radius-md); overflow: hidden; cursor: pointer; transition: all 0.3s; }
-        .faq-item:hover { border-color: var(--primary); }
-        .faq-question { padding: 25px 35px; font-weight: 700; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center; }
-        .faq-answer { padding: 0 35px 25px; color: var(--text-muted); display: none; }
-        .faq-item.active .faq-answer { display: block; }
-
-        /* Footer */
-        footer { padding: 80px 0; background: #070b14; border-top: 1px solid var(--border); margin-top: 100px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px; }
-        .footer-logo { font-size: 1.5rem; font-weight: 900; color: white; margin-bottom: 20px; display: block; }
-        .footer-links h4 { margin-bottom: 20px; font-size: 1.1rem; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
-        .footer-links a:hover { color: var(--primary); }
-
-        @media (max-width: 992px) {
-            .use-case-box { flex-direction: column !important; text-align: center; gap: 30px; }
-            .use-case-img { height: 250px; width: 100%; }
-            .hero h1 { font-size: 3.5rem; }
-            .section-title { font-size: 2.2rem; }
+        .ad-banner:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-style: solid;
+            border-color: var(--primary);
+            color: var(--text);
+            transform: scale(1.01);
         }
 
         @media (max-width: 768px) {
-            nav { height: 80px; }
-            .nav-links a:not(.btn-cta-sm) { display: none; }
-            .nav-promo { display: none; }
-            .logo { font-size: 1.5rem; }
-            .logo img { width: 32px !important; height: 32px !important; }
-            .btn-cta-sm { padding: 10px 20px; font-size: 0.9rem; }
-            
-            .hero { padding: 80px 0 100px; }
-            .hero h1 { font-size: 2.8rem; letter-spacing: -1px; }
-            .hero p { font-size: 1.1rem; margin-bottom: 40px; }
-            .btn-main { padding: 16px 35px; font-size: 1.1rem; }
-            
-            section { padding: 80px 0; }
-            .section-title { margin-bottom: 40px; }
-            .card { padding: 30px; }
+            .ad-banner-wrap {
+                padding-top: 10px;
+            }
+
+            .ad-banner {
+                font-size: 0.75rem;
+                padding: 22px 16px;
+                letter-spacing: 1px;
+                border-radius: 50px;
+            }
+        }
+
+
+        /* Hero Section */
+        .hero {
+            padding: 90px 0 140px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1000px, 100vw);
+            height: 1000px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 10vw, 6rem);
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+        }
+
+        .btn-main {
+            display: inline-block;
+            padding: 18px 45px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-main:hover {
+            transform: scale(1.05) rotate(-1deg);
+            box-shadow: 0 30px 60px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 120px 0;
+        }
+
+        .section-tag {
+            color: var(--secondary);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 60px;
+            line-height: 1.2;
+        }
+
+        /* Feature Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            transition: all 0.4s;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+        }
+
+        .card .icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* How it Works */
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .step-num {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+        }
+
+        /* Use Cases */
+        .use-case-box {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .use-case-box:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .use-case-content {
+            flex: 1;
+        }
+
+        .use-case-img {
+            flex: 0.8;
+            height: 350px;
+            background: var(--bg-light);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border);
+        }
+
+        .use-case-img::after {
+            content: 'Yaper Chat Preview';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            margin-bottom: 15px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary);
+        }
+
+        .faq-question {
+            padding: 25px 35px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 35px 25px;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0;
+            background: #070b14;
+            border-top: 1px solid var(--border);
+            margin-top: 100px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 60px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 992px) {
+            .use-case-box {
+                flex-direction: column !important;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .use-case-img {
+                height: 250px;
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                height: 80px;
+            }
+
+            .nav-links a:not(.btn-cta-sm) {
+                display: none;
+            }
+
+            .nav-promo {
+                display: none;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .logo img {
+                width: 32px !important;
+                height: 32px !important;
+            }
+
+            .btn-cta-sm {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 80px 0 100px;
+                overflow-x: hidden;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                margin-bottom: 40px;
+            }
+
+            .btn-main {
+                padding: 16px 35px;
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                margin-bottom: 40px;
+            }
+
+            .card {
+                padding: 30px;
+            }
+
+            .hero-preview {
+                transform: none !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+                margin-top: 40px !important;
+            }
         }
 
         @media (max-width: 480px) {
-            .hero h1 { font-size: 2.4rem; }
-            .container { padding: 0 20px; }
-            .footer-grid { gap: 40px; }
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .footer-grid {
+                gap: 40px;
+            }
         }
     </style>
 </head>
+
 <body>
     <nav>
         <div class="container nav-inner">
             <div class="logo" style="display: flex; align-items: center; gap: 10px;">
-                <img src="icon/icon.jpg" alt="Yaper" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover;">
+                <img src="icon/icon.jpg" alt="Yaper"
+                    style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover;">
                 Yaper
             </div>
-            
+
             <!-- Reserved Promotion Section -->
             <div class="nav-promo">
                 <a href="#" class="promo-badge">
@@ -251,7 +696,7 @@
 
     <header class="hero">
         <div class="hero-glow"></div>
-        
+
         <!-- Advertisement Banner -->
         <div class="ad-banner-wrap">
             <a href="#" class="ad-banner">
@@ -262,11 +707,15 @@
 
         <div class="container">
             <span class="section-tag">Privacy Redefined</span>
-            <h1>Beautifully Private <span style="background: linear-gradient(to right, #6EE7B7, #3B82F6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Conversations.</span></h1>
-            <p>Connect instantly with password-protected rooms, automatic vibrant identities, and no-compromise privacy. Your messages, your control.</p>
+            <h1>Beautifully Private <span
+                    style="background: linear-gradient(to right, #6EE7B7, #3B82F6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Conversations.</span>
+            </h1>
+            <p>Connect instantly with password-protected rooms, automatic vibrant identities, and no-compromise privacy.
+                Your messages, your control.</p>
             <a href="chat.html" class="btn-main">Start Your Room Now &rarr;</a>
-            
-            <div style="margin-top: 80px; transform: perspective(1000px) rotateX(10deg); box-shadow: 0 50px 100px rgba(0,0,0,0.5); border-radius: 20px; overflow: hidden; border: 1px solid var(--border);">
+
+            <div class="hero-preview"
+                style="margin-top: 80px; transform: perspective(1000px) rotateX(10deg); box-shadow: 0 50px 100px rgba(0,0,0,0.5); border-radius: 20px; overflow: hidden; border: 1px solid var(--border);">
                 <img src="preview.png" alt="Yaper Chat Interface Preview" style="width: 100%; display: block;">
             </div>
         </div>
@@ -280,32 +729,38 @@
             <div class="card">
                 <span class="icon">🎨</span>
                 <h3>Vibrant Color Identities</h3>
-                <p>Never pick a color again. Yaper's intelligent engine assigns every user a unique, high-contrast vibrant color upon entry, ensuring clear visual distinction in every chat bubble.</p>
+                <p>Never pick a color again. Yaper's intelligent engine assigns every user a unique, high-contrast
+                    vibrant color upon entry, ensuring clear visual distinction in every chat bubble.</p>
             </div>
             <div class="card">
                 <span class="icon">🏷️</span>
                 <h3>Smart Mention System</h3>
-                <p>Tag anyone with <strong>username___</strong>. Our mentioning engine highlights messages with a golden gradient and triggers priority alerts, so critical huddles never go unnoticed.</p>
+                <p>Tag anyone with <strong>username___</strong>. Our mentioning engine highlights messages with a golden
+                    gradient and triggers priority alerts, so critical huddles never go unnoticed.</p>
             </div>
             <div class="card">
                 <span class="icon">🔒</span>
                 <h3>Instant Private Rooms</h3>
-                <p>Deploy a private room in seconds. Set user limits, togglable passwords, and total room destruction once everyone leaves. Your ephemeral data stays ephemeral.</p>
+                <p>Deploy a private room in seconds. Set user limits, togglable passwords, and total room destruction
+                    once everyone leaves. Your ephemeral data stays ephemeral.</p>
             </div>
             <div class="card">
                 <span class="icon">🎨</span>
                 <h3>Immersive Theme Engine</h3>
-                <p>Switch between ultra-dark and vibrant light modes, or pick your own primary accent color to match your mood and workspace perfectly.</p>
+                <p>Switch between ultra-dark and vibrant light modes, or pick your own primary accent color to match
+                    your mood and workspace perfectly.</p>
             </div>
             <div class="card">
                 <span class="icon">🖼️</span>
                 <h3>Dynamic Backgrounds</h3>
-                <p>Set any image or gradient as your chat backdrop. Combined with adjustable glassmorphism, create a truly personal and deep conversation space.</p>
+                <p>Set any image or gradient as your chat backdrop. Combined with adjustable glassmorphism, create a
+                    truly personal and deep conversation space.</p>
             </div>
             <div class="card">
                 <span class="icon">✍️</span>
                 <h3>Tailored Typography</h3>
-                <p>Enjoy a premium reading experience with adjustable font sizes designed for maximum clarity and comfort on everything from desktops to mobile devices.</p>
+                <p>Enjoy a premium reading experience with adjustable font sizes designed for maximum clarity and
+                    comfort on everything from desktops to mobile devices.</p>
             </div>
         </div>
     </section>
@@ -341,7 +796,8 @@
             <div class="use-case-content">
                 <span class="section-tag">Gaming</span>
                 <h2>Sync Your Squad Faster.</h2>
-                <p>No account creation, no overhead. Just launch Yaper, share your temporary room link, and coordinate your next raid with crystal-clear text and zero tracking.</p>
+                <p>No account creation, no overhead. Just launch Yaper, share your temporary room link, and coordinate
+                    your next raid with crystal-clear text and zero tracking.</p>
             </div>
             <div class="use-case-img" style="background: url('preview.png') center/cover no-repeat;"></div>
         </div>
@@ -349,9 +805,11 @@
             <div class="use-case-content">
                 <span class="section-tag">Business</span>
                 <h2>Confidential Huddles Only.</h2>
-                <p>Need a quick, private space to discuss sensitive info? Yaper's session-based logic ensures that once your meeting is over, that data vanishes from memory.</p>
+                <p>Need a quick, private space to discuss sensitive info? Yaper's session-based logic ensures that once
+                    your meeting is over, that data vanishes from memory.</p>
             </div>
-            <div class="use-case-img" style="background: url('preview.png') center/cover no-repeat; filter: hue-rotate(90deg);"></div>
+            <div class="use-case-img"
+                style="background: url('preview.png') center/cover no-repeat; filter: hue-rotate(90deg);"></div>
         </div>
     </section>
 
@@ -359,38 +817,49 @@
     <section id="faq" class="container" style="max-width: 800px;">
         <span class="section-tag">Get Answers</span>
         <h2 class="section-title" style="text-align: center;">Frequently Asked.</h2>
-        
+
         <div class="faq-item" onclick="this.classList.toggle('active')">
             <div class="faq-question">How can I create a private chat room? <span>+</span></div>
-            <div class="faq-answer">Creating a room is instant. Simply enter a unique name on the launch screen. If the room doesn't exist, it's created automatically with you as the host, allowing you to set passwords and user limits.</div>
+            <div class="faq-answer">Creating a room is instant. Simply enter a unique name on the launch screen. If the
+                room doesn't exist, it's created automatically with you as the host, allowing you to set passwords and
+                user limits.</div>
         </div>
         <div class="faq-item" onclick="this.classList.toggle('active')">
             <div class="faq-question">Is Yaper better than y99 or chitchat? <span>+</span></div>
-            <div class="faq-answer">Unlike legacy platforms such as y99 or chitchat, Yaper focuses on ultra-fast, zero-log, session-based conversations. We provide vibrant automated identities and high-quality image sharing without the tracking or clutter of older platforms.</div>
+            <div class="faq-answer">Unlike legacy platforms such as y99 or chitchat, Yaper focuses on ultra-fast,
+                zero-log, session-based conversations. We provide vibrant automated identities and high-quality image
+                sharing without the tracking or clutter of older platforms.</div>
         </div>
         <div class="faq-item" onclick="this.classList.toggle('active')">
             <div class="faq-question">Do I need an account for anonymous chatting? <span>+</span></div>
-            <div class="faq-answer">No. Yaper is built for privacy and speed. There is no registration required. You just enter the room, pick a temporary alias, and start chatting immediately.</div>
+            <div class="faq-answer">No. Yaper is built for privacy and speed. There is no registration required. You
+                just enter the room, pick a temporary alias, and start chatting immediately.</div>
         </div>
         <div class="faq-item" onclick="this.classList.toggle('active')">
             <div class="faq-question">Is Yaper safe for secure business huddles? <span>+</span></div>
-            <div class="faq-answer">Yes. Because messages are held in-memory and rooms are purged once inactive, Yaper is ideal for confidential huddles and quick project syncs where no permanent record is desired.</div>
+            <div class="faq-answer">Yes. Because messages are held in-memory and rooms are purged once inactive, Yaper
+                is ideal for confidential huddles and quick project syncs where no permanent record is desired.</div>
         </div>
         <div class="faq-item" onclick="this.classList.toggle('active')">
             <div class="faq-question">Does Yaper store my messages? <span>+</span></div>
-            <div class="faq-answer">No. Yaper operates on a session-persistence model. Messages are held in-memory for recent history (up to 50 messages) and are cleared once a room becomes inactive for an extended period.</div>
+            <div class="faq-answer">No. Yaper operates on a session-persistence model. Messages are held in-memory for
+                recent history (up to 50 messages) and are cleared once a room becomes inactive for an extended period.
+            </div>
         </div>
         <div class="faq-item" onclick="this.classList.toggle('active')">
             <div class="faq-question">Can I use Yaper on my phone? <span>+</span></div>
-            <div class="faq-answer">Absolutely. Yaper is built with a mobile-first philosophy, ensuring the landing page and chat interface are perfectly responsive on any screen size.</div>
+            <div class="faq-answer">Absolutely. Yaper is built with a mobile-first philosophy, ensuring the landing page
+                and chat interface are perfectly responsive on any screen size.</div>
         </div>
         <div class="faq-item" onclick="this.classList.toggle('active')">
             <div class="faq-question">How do the mentions work? <span>+</span></div>
-            <div class="faq-answer">Simply type the name of the user you want to tag followed by three underscores, like <strong>alex___</strong>. The system handles the rest.</div>
+            <div class="faq-answer">Simply type the name of the user you want to tag followed by three underscores, like
+                <strong>alex___</strong>. The system handles the rest.</div>
         </div>
         <div class="faq-item" onclick="this.classList.toggle('active')">
             <div class="faq-question">Is it free to use? <span>+</span></div>
-            <div class="faq-answer">Yes, Yaper is currently free to use with all features enabled including private rooms and custom user limits.</div>
+            <div class="faq-answer">Yes, Yaper is currently free to use with all features enabled including private
+                rooms and custom user limits.</div>
         </div>
     </section>
 
@@ -443,4 +912,5 @@
         });
     </script>
 </body>
+
 </html>
