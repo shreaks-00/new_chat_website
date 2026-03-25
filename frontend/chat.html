@@ -669,7 +669,7 @@
             .header-bar h2 {
                 font-size: 1.5rem;
             }
-            #status {
+            #status-text {
                 display: none !important;
             }
             .icon-btn {
@@ -1014,8 +1014,10 @@
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 15px;">
-                    <span id="status"
-                        style="color: var(--text-muted); font-size: 14px; font-weight: 600;">Connecting...</span>
+                    <div id="status-container" style="display: flex; align-items: center; gap: 6px;" title="Connecting...">
+                        <div id="status-dot" style="width: 10px; height: 10px; border-radius: 50%; background: var(--text-muted); box-shadow: 0 0 5px rgba(0,0,0,0.1);"></div>
+                        <span id="status-text" style="color: var(--text-muted); font-size: 14px; font-weight: 600;">Connecting...</span>
+                    </div>
                     <!-- Theme Toggle -->
                     <button id="theme-toggle" class="icon-btn" title="Toggle Dark Mode">🌙</button>
                     <!-- Settings Toggle -->
@@ -1184,9 +1186,12 @@
 
         // Socket Logic
         socket.on('connect', function () {
-            var s = document.getElementById('status');
-            s.innerText = "Connected";
-            s.style.color = "#28a745"; // Success green
+            var st = document.getElementById('status-text');
+            var sd = document.getElementById('status-dot');
+            var sc = document.getElementById('status-container');
+            if (st) { st.innerText = "Connected"; st.style.color = "#28a745"; }
+            if (sd) { sd.style.background = "#28a745"; }
+            if (sc) { sc.title = "Connected"; }
 
             if (username && room) {
                 var password = document.getElementById('join_password') ? document.getElementById('join_password').value : '';
@@ -1195,9 +1200,12 @@
         });
 
         socket.on('disconnect', function () {
-            var s = document.getElementById('status');
-            s.innerText = "Reconnecting...";
-            s.style.color = "var(--danger)";
+            var st = document.getElementById('status-text');
+            var sd = document.getElementById('status-dot');
+            var sc = document.getElementById('status-container');
+            if (st) { st.innerText = "Reconnecting..."; st.style.color = "var(--danger)"; }
+            if (sd) { sd.style.background = "var(--danger)"; }
+            if (sc) { sc.title = "Reconnecting..."; }
         });
 
         socket.on('join_error', function (data) {
