@@ -777,6 +777,36 @@
             }
 
             .roster-sidebar {
+                position: fixed;
+                top: 0;
+                right: -280px;
+                width: 250px;
+                height: 100%;
+                z-index: 2100;
+                background: var(--panel-bg);
+                backdrop-filter: var(--glass-blur);
+                -webkit-backdrop-filter: var(--glass-blur);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: -20px 0 50px rgba(0, 0, 0, 0.1);
+                display: flex !important;
+                border: none;
+                border-left: 1px solid var(--border-color);
+                border-radius: 0;
+            }
+
+            .roster-sidebar.open {
+                transform: translateX(-280px);
+            }
+
+            #roster-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(4px);
+                z-index: 2050;
                 display: none;
             }
 
@@ -787,6 +817,12 @@
                 font-weight: 600;
                 color: var(--primary);
                 cursor: pointer;
+            }
+
+            .mobile-toggle-btn {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
             }
 
             .pc-only-btn {
@@ -958,6 +994,7 @@
 <body>
     <div class="container">
         <div id="menu-overlay" onclick="toggleMenu(false)"></div>
+        <div id="roster-overlay" onclick="toggleRoster(false)"></div>
         <div id="settings-overlay" onclick="closeSettings()"></div>
 
         <!-- Settings Panel -->
@@ -1081,8 +1118,11 @@
                         <span>←</span> Back
                     </div>
                     <h3 id="room-header" style="margin: 0; font-size: 1.4rem;"></h3>
-                    <button onclick="leaveRoom()" class="danger pc-only-btn"
-                        style="width: auto; padding: 6px 12px; font-size: 0.9rem;">Leave Room</button>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button onclick="toggleRoster(true)" class="icon-btn mobile-toggle-btn" style="display: none; width: 40px; height: 40px; font-size: 1.2rem;" title="Users Online">👥</button>
+                        <button onclick="leaveRoom()" class="danger pc-only-btn"
+                            style="width: auto; padding: 6px 12px; font-size: 0.9rem;">Leave Room</button>
+                    </div>
                 </div>
 
                 <div class="chat-container">
@@ -1542,6 +1582,18 @@
                 overlay.style.display = 'block';
             } else {
                 panel.classList.remove('open');
+                overlay.style.display = 'none';
+            }
+        }
+
+        function toggleRoster(show) {
+            const roster = document.querySelector('.roster-sidebar');
+            const overlay = document.getElementById('roster-overlay');
+            if (show) {
+                roster.classList.add('open');
+                overlay.style.display = 'block';
+            } else {
+                roster.classList.remove('open');
                 overlay.style.display = 'none';
             }
         }
