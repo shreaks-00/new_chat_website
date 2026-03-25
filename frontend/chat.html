@@ -41,6 +41,15 @@
             --msg-bg-own: #8b5cf6;
         }
 
+        /* Custom Background active overrides */
+        body.custom-bg-active {
+            --panel-bg: rgba(255, 255, 255, 0.35);
+            --glass-blur: blur(8px);
+        }
+        body.dark-mode.custom-bg-active {
+            --panel-bg: rgba(15, 23, 42, 0.45);
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -565,8 +574,100 @@
             display: inline-block;
         }
 
+        /* ===== SETTINGS PANEL ===== */
+        #settings-overlay {
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+            display: none; z-index: 3000; animation: fadeIn 0.25s ease;
+        }
+        #settings-panel {
+            position: fixed; top:0; right:-420px; width:380px; max-width:95vw;
+            height:100%; background: var(--panel-bg); backdrop-filter: var(--glass-blur);
+            border-left: 1px solid var(--border-color);
+            display: flex; flex-direction: column;
+            z-index: 3100; transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: -20px 0 50px rgba(0,0,0,0.15);
+            overflow-y: auto;
+        }
+        #settings-panel.open { right: 0; }
+        .settings-header {
+            padding: 28px 28px 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-shrink: 0;
+        }
+        .settings-header h3 {
+            margin: 0; font-size: 1.4rem; font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), #ec4899);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .settings-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 28px; }
+        .setting-group { display: flex; flex-direction: column; gap: 10px; }
+        .setting-group label {
+            font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--text-muted);
+        }
+        .setting-group .setting-desc {
+            font-size: 0.78rem; color: var(--text-muted); margin-top: -6px;
+        }
+        .font-size-row { display: flex; gap: 8px; }
+        .font-size-btn {
+            flex: 1; padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px; background: var(--panel-bg);
+            color: var(--text-main); font-weight: 600;
+            cursor: pointer; transition: all 0.2s; width: auto;
+        }
+        .font-size-btn:hover { border-color: var(--primary); }
+        .font-size-btn.active {
+            background: var(--primary); color: white;
+            border-color: var(--primary);
+        }
+        .color-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+        .color-swatch {
+            width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+            border: 3px solid transparent; transition: all 0.2s;
+        }
+        .color-swatch:hover { transform: scale(1.15); }
+        .color-swatch.active { border-color: var(--text-main); box-shadow: 0 0 0 3px var(--panel-bg), 0 0 0 5px var(--text-main); }
+        #custom-color-row { display: flex; gap: 10px; align-items: center; margin-top: 4px; }
+        #custom-color-input { width: 46px; height: 36px; padding: 2px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; background: none; }
+        #custom-color-label { font-size: 0.85rem; color: var(--text-muted); }
+        .bg-input-row { display: flex; gap: 8px; align-items: center; }
+        .bg-input-row input[type=text] { margin-bottom: 0; font-size: 0.85rem; }
+        .btn-sm-danger {
+            width: auto; padding: 8px 14px; font-size: 0.8rem;
+            background: var(--danger); color: white; border: none;
+            border-radius: 8px; cursor: pointer; white-space: nowrap;
+        }
+        .btn-sm-danger:hover { background: var(--danger-hover); }
+        .settings-reset-btn {
+            margin: 0 28px 28px;
+            padding: 14px; border-radius: 12px;
+            background: transparent; border: 2px solid var(--danger);
+            color: var(--danger); font-weight: 700; font-size: 1rem;
+            cursor: pointer; transition: all 0.2s; width: calc(100% - 56px);
+        }
+        .settings-reset-btn:hover { background: var(--danger); color: white; }
+        #bg-preview {
+            width: 100%; height: 80px; border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--panel-bg) center/cover no-repeat;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
         /* Mobile Adjustments */
         @media (max-width: 768px) {
+            #settings-panel {
+                width: 100vw; max-width: 100vw;
+                border-left: none;
+            }
+            .settings-header { padding: 24px 20px 16px; }
+            .settings-body { padding: 20px; gap: 24px; }
+            .settings-reset-btn { margin: 0 20px 20px; width: calc(100% - 40px); }
+
             .container {
                 flex-direction: column;
                 height: 100dvh;
@@ -818,6 +919,57 @@
 <body>
     <div class="container">
         <div id="menu-overlay" onclick="toggleMenu(false)"></div>
+        <div id="settings-overlay" onclick="closeSettings()"></div>
+
+        <!-- Settings Panel -->
+        <div id="settings-panel">
+            <div class="settings-header">
+                <h3>⚙️ Settings</h3>
+                <button onclick="closeSettings()" style="width:auto; background:none; color:var(--text-muted); font-size:1.5rem; padding:0; border:none; cursor:pointer;">&times;</button>
+            </div>
+            <div class="settings-body">
+                <!-- Font Size -->
+                <div class="setting-group">
+                    <label style="display:flex; justify-content:space-between;">
+                        Font Size 
+                        <span id="font-size-val" style="color:var(--primary);">16px</span>
+                    </label>
+                    <input type="range" id="font-size-slider" min="12" max="22" value="16" step="1" oninput="setFontSize(this.value)" style="width: 100%; margin: 8px 0; accent-color: var(--primary);">
+                </div>
+
+                <!-- Theme Color -->
+                <div class="setting-group">
+                    <label>Theme Color</label>
+                    <div class="color-grid" id="color-swatches">
+                        <div class="color-swatch" style="background:#6366f1" data-color="#6366f1" onclick="setThemeColor('#6366f1', this)" title="Indigo"></div>
+                        <div class="color-swatch" style="background:#7c3aed" data-color="#7c3aed" onclick="setThemeColor('#7c3aed', this)" title="Purple"></div>
+                        <div class="color-swatch" style="background:#ec4899" data-color="#ec4899" onclick="setThemeColor('#ec4899', this)" title="Pink"></div>
+                        <div class="color-swatch" style="background:#3b82f6" data-color="#3b82f6" onclick="setThemeColor('#3b82f6', this)" title="Blue"></div>
+                        <div class="color-swatch" style="background:#10b981" data-color="#10b981" onclick="setThemeColor('#10b981', this)" title="Emerald"></div>
+                        <div class="color-swatch" style="background:#f59e0b" data-color="#f59e0b" onclick="setThemeColor('#f59e0b', this)" title="Amber"></div>
+                        <div class="color-swatch" style="background:#ef4444" data-color="#ef4444" onclick="setThemeColor('#ef4444', this)" title="Red"></div>
+                        <div class="color-swatch" style="background:#06b6d4" data-color="#06b6d4" onclick="setThemeColor('#06b6d4', this)" title="Cyan"></div>
+                    </div>
+                    <div id="custom-color-row">
+                        <input type="color" id="custom-color-input" value="#7c3aed" oninput="setThemeColor(this.value, null)" title="Custom color">
+                        <span id="custom-color-label">Custom color</span>
+                    </div>
+                </div>
+
+                <!-- Custom Background -->
+                <div class="setting-group">
+                    <label>Chat Background</label>
+                    <div class="bg-input-row">
+                        <input type="text" id="bg-url-input" placeholder="Paste image URL..." oninput="previewBg(this.value)">
+                        <button class="btn-sm-danger" onclick="clearBg()">Clear</button>
+                    </div>
+                    <div id="bg-preview">Preview</div>
+                    <button onclick="applyBg()" style="margin-top:4px;">Apply Background</button>
+                </div>
+            </div>
+            <button class="settings-reset-btn" onclick="resetAllSettings()">🔄 Reset All Settings</button>
+        </div>
+
         <!-- Left Panel: Directory -->
         <div id="left-panel">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
@@ -835,12 +987,18 @@
             <div class="header-bar">
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <button id="menu-toggle" onclick="toggleMenu(true)" title="Rooms List">☰</button>
-                    <h2>Yaper</h2>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="icon/icon.jpg" alt="Yaper" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
+                        <h2>Yaper</h2>
+                    </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <span id="status"
                         style="color: var(--text-muted); font-size: 14px; font-weight: 600;">Connecting...</span>
+                    <!-- Theme Toggle -->
                     <button id="theme-toggle" class="icon-btn" title="Toggle Dark Mode">🌙</button>
+                    <!-- Settings Toggle -->
+                    <button id="settings-toggle" class="icon-btn" onclick="openSettings()" title="Settings">⚙️</button>
                 </div>
             </div>
 
@@ -942,6 +1100,15 @@
         const themeBtn = document.getElementById('theme-toggle');
         const picker = document.querySelector('emoji-picker');
 
+        function updateBgGradient(color, isDark) {
+            let r=parseInt(color.substr(1,2),16), g=parseInt(color.substr(3,2),16), b=parseInt(color.substr(5,2),16);
+            if (isDark) {
+                document.body.style.setProperty('--bg-gradient', `linear-gradient(135deg, rgba(${r},${g},${b},0.15) 0%, #0f172a 100%)`);
+            } else {
+                document.body.style.setProperty('--bg-gradient', `linear-gradient(135deg, rgba(${r},${g},${b},0.12) 0%, rgba(${r},${g},${b},0.03) 100%)`);
+            }
+        }
+
         function applyTheme(isDark) {
             if (isDark) {
                 document.body.classList.add('dark-mode');
@@ -952,6 +1119,8 @@
                 themeBtn.innerText = '🌙';
                 picker.classList.remove('dark');
             }
+            const currentColor = localStorage.getItem('yaper_theme_color') || '#7c3aed';
+            updateBgGradient(currentColor, isDark);
         }
 
         if (localStorage.getItem('theme') === 'dark') {
@@ -1359,7 +1528,124 @@
         socket.on('room_list', function (rooms) {
             activeRoomsCache = rooms;
         });
+
+        // --- SETTINGS LOGIC ---
+        const settingsPanel = document.getElementById('settings-panel');
+        const settingsOverlay = document.getElementById('settings-overlay');
+
+        function openSettings() {
+            settingsPanel.classList.add('open');
+            settingsOverlay.style.display = 'block';
+        }
+
+        function closeSettings() {
+            settingsPanel.classList.remove('open');
+            settingsOverlay.style.display = 'none';
+        }
+
+        // Font Size
+        function setFontSize(size) {
+            document.body.style.fontSize = size + 'px';
+            document.getElementById('font-size-slider').value = size;
+            document.getElementById('font-size-val').innerText = size + 'px';
+            localStorage.setItem('yaper_font_size', size);
+        }
+
+        // Theme Color
+        function setThemeColor(color, btnElement) {
+            document.body.style.setProperty('--primary', color);
+            document.body.style.setProperty('--msg-bg-own', color);
+            
+            // Generate a darker hover color
+            let r=parseInt(color.substr(1,2),16), g=parseInt(color.substr(3,2),16), b=parseInt(color.substr(5,2),16);
+            r=Math.max(0,r-20); g=Math.max(0,g-20); b=Math.max(0,b-20);
+            document.body.style.setProperty('--primary-hover', `rgb(${r},${g},${b})`);
+
+            // Update background tint
+            updateBgGradient(color, document.body.classList.contains('dark-mode'));
+
+            document.querySelectorAll('.color-swatch').forEach(b => b.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+            
+            document.getElementById('custom-color-input').value = color; // sync picker
+            localStorage.setItem('yaper_theme_color', color);
+        }
+
+        // Background Image
+        function previewBg(url) {
+            const preview = document.getElementById('bg-preview');
+            if (url) {
+                preview.style.backgroundImage = `url('${url}')`;
+                preview.innerText = '';
+            } else {
+                preview.style.backgroundImage = 'none';
+                preview.innerText = 'Preview';
+            }
+        }
+
+        function clearBg() {
+            document.getElementById('bg-url-input').value = '';
+            previewBg('');
+            applyBg();
+        }
+
+        function applyBg() {
+            const url = document.getElementById('bg-url-input').value;
+            if (url) {
+                document.body.style.backgroundImage = `url('${url}')`;
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundPosition = 'center';
+                document.body.classList.add('custom-bg-active');
+                localStorage.setItem('yaper_bg_url', url);
+            } else {
+                document.body.style.backgroundImage = 'var(--bg-gradient)';
+                document.body.classList.remove('custom-bg-active');
+                localStorage.removeItem('yaper_bg_url');
+            }
+        }
+
+        function resetAllSettings() {
+            if (confirm('Are you sure you want to reset all settings to default?')) {
+                localStorage.removeItem('yaper_font_size');
+                localStorage.removeItem('yaper_theme_color');
+                localStorage.removeItem('yaper_bg_url');
+                
+                // Defaults
+                setFontSize(16);
+                setThemeColor('#7c3aed', document.querySelector('.color-swatch[data-color="#7c3aed"]'));
+                clearBg();
+            }
+        }
+
+        // Load Settings on Boot
+        function loadSettings() {
+            const savedSize = localStorage.getItem('yaper_font_size');
+            const savedColor = localStorage.getItem('yaper_theme_color');
+            const savedBg = localStorage.getItem('yaper_bg_url');
+
+            if (savedSize) {
+                setFontSize(savedSize);
+            } else {
+                setFontSize(16);
+            }
+
+            if (savedColor) {
+                const btn = document.querySelector(`.color-swatch[data-color="${savedColor}"]`);
+                setThemeColor(savedColor, btn);
+            } else {
+                document.querySelector('.color-swatch[data-color="#7c3aed"]').classList.add('active');
+                updateBgGradient('#7c3aed', document.body.classList.contains('dark-mode'));
+            }
+
+            if (savedBg) {
+                document.getElementById('bg-url-input').value = savedBg;
+                previewBg(savedBg);
+                applyBg();
+            }
+        }
+
+        // Initialize settings immediately
+        loadSettings();
     </script>
 </body>
-
 </html>

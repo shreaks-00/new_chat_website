@@ -16,6 +16,17 @@ socketio = SocketIO(app, cors_allowed_origins="*", max_http_buffer_size=10485760
 room_info = {} # Maps room_name -> {'is_private': bool, 'password': str, 'limit': int, 'users': {username: dict}}
 room_history = {} # Stores latest 50 messages per room
 session_users = {} # Maps connections: {sid: {'username': 'u', 'room': 'r', 'color': 'color'}}
+PERMANENT_ROOMS = {'General'} # These rooms are never deleted
+
+# Initialize permanent rooms
+room_info['General'] = {
+    'is_private': False,
+    'password': '',
+    'limit': 50,
+    'users': {},
+    'permanent': True,
+    'description': 'The main public lounge — open to everyone.'
+}
 disconnect_timers = {} # Maps (room, username) -> Timer
 
 VIBRANT_COLORS = [
@@ -37,7 +48,16 @@ def broadcast_room_users(room):
         socketio.emit('room_users', users_list, to=room)
 
 def update_room_list(to=None):
-    rooms_data = [{'name': r, 'private': room_info[r].get('is_private', False)} for r in room_info.keys()]
+    rooms_data = [
+        {
+            'name': r,
+            'private': room_info[r].get('is_private', False),
+            'permanent': room_info[r].get('permanent', False),
+            'description': room_info[r].get('description', ''),
+            'user_count': len(room_info[r]['users'])
+        }
+        for r in room_info.keys()
+    ]
     if to:
         socketio.emit('room_list', rooms_data, to=to)
     else:
@@ -69,7 +89,9 @@ def handle_disconnect():
                         broadcast_room_users(room)
                         if len(room_info[room]['users']) == 0:
                             if room in room_info and len(room_info[room]['users']) == 0:
-                                del room_info[room]
+                                # Only delete non-permanent rooms
+                                if room not in PERMANENT_ROOMS:
+                                    del room_info[room]
                         update_room_list()
                         send(f"{username} has disconnected.", to=room)
                 disconnect_timers.pop((room, username), None)
@@ -160,7 +182,9 @@ def on_leave(data):
             del room_info[room]['users'][username]
             broadcast_room_users(room)
             if len(room_info[room]['users']) == 0:
-                del room_info[room]
+                # Only delete non-permanent rooms
+                if room not in PERMANENT_ROOMS:
+                    del room_info[room]
             update_room_list()
     if request.sid in session_users:
         del session_users[request.sid]
@@ -185,7 +209,7 @@ def handle_message(data):
     msg_obj = {
         'id': msg_id, 'msg': raw_msg, 'user': user_info['username'], 
         'color': user_info.get('color', '#000000'), 'type': data.get('type', 'text'),
-        'timestamp': datetime.now().strftime("%I:%M %p"), 'seen_by': []
+        'timestamp': datetime.now().strftime("%H:%M"), 'seen_by': []
     }
     if room not in room_history: room_history[room] = []
     room_history[room].append(msg_obj)
@@ -205,6 +229,23 @@ def handle_mark_read(data):
                 if username not in msg['seen_by']:
                     msg['seen_by'].append(username)
                     emit('message_status_update', {'msg_id': msg_id, 'seen_by': msg['seen_by']}, to=room)
+                break
+
+@socketio.on('delete_message')
+def handle_delete_message(data):
+    user_info = session_users.get(request.sid)
+    if not user_info: return
+    room = user_info['room']
+    msg_id = data.get('msg_id')
+    username = user_info['username']
+    
+    if room in room_history:
+        # Find and remove the message if the user is the author
+        for i, msg in enumerate(room_history[room]):
+            if msg.get('id') == msg_id:
+                if msg.get('user') == username:
+                    room_history[room].pop(i)
+                    emit('message_deleted', {'msg_id': msg_id}, to=room)
                 break
 
 
